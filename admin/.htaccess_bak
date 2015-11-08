@@ -1,0 +1,5 @@
+#REDIRECTbyIPSERVERONE
+RewriteEngine On
+RewriteBase /onlinestore/admin/
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/onlinestore/admin/$1 [R=301,L]
