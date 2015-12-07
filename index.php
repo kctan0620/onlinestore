@@ -4,6 +4,8 @@ ini_set('log_errors', 1);
 error_reporting(E_ALL);
 error_reporting(E_ERROR | E_PARSE);
 
+date_default_timezone_set("Asia/Kuala_Lumpur");
+
 // Version
 define('VERSION', '2.0.3.1');
 

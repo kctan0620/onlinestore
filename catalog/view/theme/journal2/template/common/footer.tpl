@@ -37,6 +37,7 @@
         </div>
     </div>
 </footer>
+
 <div class="scroll-top"></div>
 <?php if ($this->journal2->settings->get('config_footer_modules')):  ?>
 <?php echo $this->journal2->settings->get('config_footer_modules'); ?>
@@ -48,7 +49,11 @@
 <?php endif; ?>
 <?php $this->load->library('user'); $user = new User($this->registry); if ($user->isLogged()): ?>
 <script src="catalog/view/theme/journal2/lib/ascii-table/ascii-table.min.js"></script>
+
+
 <script>
+
+
     (function () {
         if (console && console.log) {
             var timers = $.parseJSON('<?php echo json_encode(Journal2::getTimer()); ?>');
@@ -65,8 +70,20 @@
             });
             console.log(table.toString());
         }
+
+        
+       
+
     }());
+
+   
+    	
+     
+
+    
 </script>
+
+
 
 <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
@@ -79,5 +96,8 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 <!--End of Zopim Live Chat Script-->
 
 <?php endif; ?>
+
+
+
 </body>
 </html>

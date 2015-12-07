@@ -17,11 +17,11 @@ class ModelAccountSerialkeys extends Model {
             . DB_PREFIX . "order_serialkey od
 			LEFT JOIN `" . DB_PREFIX . "order` o ON od.order_id = o.order_id
 		WHERE
-			o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id = '" . $this->config->get('config_complete_status') . "' ORDER BY o.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
+			o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id = 5 ORDER BY o.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
 
-
-        $query = $this->db->query($sql);
-
+		
+        $query = $this->db->query($sql);      
+        
         return $query->rows;
     }
 

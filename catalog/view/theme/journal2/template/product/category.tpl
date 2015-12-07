@@ -1,7 +1,11 @@
 <?php echo $header; ?>
-<?php $event_intel_id = 173; ?>
+<?php 
+	$event_intel_id = 173;
+	$event_microsoft_id = 177;
+	$event_gaming_id = 179;
+?>
 <!-- No product text will no appear if special category page -->
-<?php $arr_event_category = array(173);?>
+<?php $arr_event_category = array(173,177,179);?>
 
 <div id="container" class="container j-container">
   <ul class="breadcrumb">
@@ -45,7 +49,7 @@
       <?php endif; ?>
       <?php if($this->journal2->settings->get('refine_category') === 'carousel'): ?>
       
-      <?php if($this->request->get['path'] != $event_intel_id): ?>
+       <?php if(!in_array($this->request->get['path'], $arr_event_category)): ?>
       <div id="refine-images" class="owl-carousel">
         <?php foreach ($this->journal2->settings->get('refine_category_images', array()) as $category): ?>
         <div class="refine-image">
@@ -161,8 +165,8 @@
 				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
 				                </div>
 				                <?php else: ?>
-				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
-				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
 				                </div>
 				                <?php endif; ?>
 				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
@@ -237,8 +241,8 @@
 				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
 				                </div>
 				                <?php else: ?>
-				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
-				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
 				                </div>
 				                <?php endif; ?>
 				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
@@ -313,8 +317,8 @@
 				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
 				                </div>
 				                <?php else: ?>
-				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
-				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
 				                </div>
 				                <?php endif; ?>
 				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
@@ -329,7 +333,621 @@
       		</div>
       		
       <?php endif;?>
-
+      <!-- This is End of Intel Page ID -->
+      
+      <!-- This is Microsoft Page ID -->
+      <?php if($this->request->get['path'] == $event_microsoft_id): ?>
+      		<img src="http://www.tmt.my/onlinestore/image/Banner/Microsoft%20Main%20Banner.jpg" width="100%" height="auto">
+      		<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=177"><b style="font-size:25px">Microsoft Surface Pro 4</b></a>
+      		<img src="http://www.tmt.my/onlinestore/image/Banner/Surface%20Pro%204%20Banner.jpg" width="100%" height="auto">
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_microsoft_group1) { ?>
+      			
+      			<?php foreach ($products_microsoft_group1 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=177"><b style="font-size:25px">Microsoft Surface Pro 3</b></a>
+      		<img src="http://www.tmt.my/onlinestore/image/Banner/Surface%20Pro%203%20Banner.jpg" width="100%" height="auto">
+      		
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_microsoft_group2) { ?>
+      			
+      			<?php foreach ($products_microsoft_group2 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=177"><b style="font-size:25px">Type Cover Surface</b></a>
+      		<img src="http://www.tmt.my/onlinestore/image/Banner/Type%20cover.jpg" width="100%" height="auto">
+      		
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_microsoft_group3) { ?>
+      			
+      			<?php foreach ($products_microsoft_group3 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      <?php endif;?>
+	  <!-- This is End of Microsoft Page ID -->
+	  
+	  <!-- This is Gaming Page ID -->
+      <?php if($this->request->get['path'] == $event_gaming_id): ?>
+      		<img src="http://www.tmt.my/onlinestore/image/Banner/Gaming%20main%20banner%20event.jpg" width="100%" height="auto">
+      		<h2 class="secondary-title"><span style="color:navy;padding-right:5px;">FLOOR 1</span>  <a href="#"><b style="font-size:20px">DOTA 2</b></a></h2>      		
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_gaming_group1) { ?>
+      			
+      			<?php foreach ($products_gaming_group1 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		<h2 class="secondary-title"><span style="color:navy;padding-right:5px;">FLOOR 2</span><a href="#"><b style="font-size:20px">GAME CODE</b></a></h2>
+      		
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_gaming_group2) { ?>
+      			
+      			<?php foreach ($products_gaming_group2 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		<h2 class="secondary-title"><span style="color:navy;padding-right:5px;">FLOOR 3</span><a href="#"><b style="font-size:20px">TOS & CARD GAME</b></a></h2>
+      		
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_gaming_group3) { ?>
+      			
+      			<?php foreach ($products_gaming_group3 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		
+      		<h2 class="secondary-title"><span style="color:navy;padding-right:5px;">FLOOR 4</span><a href="#"><b style="font-size:20px">GAMING PC & LAPTOP</b></a></h2>
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_gaming_group4) { ?>
+      			
+      			<?php foreach ($products_gaming_group4 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>
+      		
+      		 
+      		<h2 class="secondary-title"><span style="color:navy;padding-right:5px;">FLOOR 5</span><a href="#"><b style="font-size:20px">GAMING KEYBOARD & MOUSE</b></a></h2>
+      		<div class="row main-products product-list" data-grid-classes="<?php echo $this->journal2->settings->get('product_grid_classes'); ?> display-<?php echo $this->journal2->settings->get('product_grid_wishlist_icon_display'); ?> <?php echo $this->journal2->settings->get('product_grid_button_block_button'); ?>">
+      			<?php if($products_gaming_group5) { ?>
+      			
+      			<?php foreach ($products_gaming_group5 as $product) : ?>
+				        <div class="product-list-item xs-100 sm-100 md-100 lg-100 xl-100">
+				          <div class="product-thumb <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+				            <div class="image">
+				              <a href="<?php echo $product['href']; ?>" <?php if(isset($product['thumb2']) && $product['thumb2']): ?> class="has-second-image" style="background: url('<?php echo $product['thumb2']; ?>') no-repeat;" <?php endif; ?>>
+				                  <img class="lazy first-image" width="<?php echo $this->journal2->settings->get('config_image_width'); ?>" height="<?php echo $this->journal2->settings->get('config_image_height'); ?>" src="<?php echo $this->journal2->settings->get('product_dummy_image'); ?>" data-src="<?php echo $product['thumb']; ?>" title="<?php echo $product['name']; ?>" alt="<?php echo $product['name']; ?>" />
+				              </a>
+				              <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
+				              <?php foreach ($product['labels'] as $label => $name): ?>
+				              <?php if ($label === 'outofstock'): ?>
+				              <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+				              <?php else: ?>
+				              <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
+				              <?php endif; ?>
+				              <?php endforeach; ?>
+				              <?php endif; ?>
+				              <?php if($this->journal2->settings->get('product_grid_wishlist_icon_position') === 'image' && $this->journal2->settings->get('product_grid_wishlist_icon_display', '') === 'icon'): ?>
+				                  <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              <?php endif; ?>
+				            </div>
+				            <div class="product-details">
+				              <div class="caption">
+				                <h4 class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
+				                <p class="description"><?php echo $product['description']; ?></p>
+				                <?php if ($product['rating']) { ?>
+				                <div class="rating">
+				                  <?php for ($i = 1; $i <= 5; $i++) { ?>
+				                  <?php if ($product['rating'] < $i) { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } else { ?>
+				                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+				                  <?php } ?>
+				                  <?php } ?>
+				                </div>
+				                <?php } ?>
+				                <?php if ($product['price']) { ?>
+				                <p class="price">
+				                  <?php if (!$product['special']) { ?>
+				                  <?php echo $product['price']; ?>
+				                  <?php } else { ?>
+				                  <span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new" <?php echo isset($product['date_end']) && $product['date_end'] ? "data-end-date='{$product['date_end']}'" : ""; ?>><?php echo $product['special']; ?></span>
+				                  <?php } ?>
+				                  <?php if ($product['tax']) { ?>
+				                  <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+				                  <?php } ?>
+				                </p>
+				                <?php } ?>
+				              </div>
+				              <div class="button-group">
+				                <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+				                <div class="cart enquiry-button">
+				                  <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
+				                </div>
+				                <?php else: ?>
+				                <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?> intel_button">
+				                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top intel_button" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+				                </div>
+				                <?php endif; ?>
+				                <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
+				                <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+		        	<?php endforeach; ?>
+      			
+      			<?php } ?>
+      		</div>      		      		
+      		
+      <?php endif;?>
+	  <!-- This is End of Microsoft Page ID -->
+	  
       
       <?php if ($products) { ?>
 

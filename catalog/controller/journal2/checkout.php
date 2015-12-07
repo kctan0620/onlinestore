@@ -400,6 +400,27 @@ class ControllerJournal2Checkout extends Controller {
                     'type'                    => $option['type']
                 );
             }
+            
+            //added by KC
+            //check quantity of Product
+            //$errors['quantity'] = $product['quantity'];
+            $product_info = $this->model_catalog_product->getProduct($product['product_id']);
+            if($product_info['ontime_deduct']):
+	            $this->load->model('catalog/product');
+	            
+	            if ($product_info) {
+	            	if($product_info['quantity'] <= 0):
+	            		$errors['quantity'] = strip_tags($this->language->get('error_quantity'));	            	
+		            endif;	            	
+		            		            		            
+		            if($product_info['quantity'] > 0):		            
+			            $qty = $product['quantity'];			           
+			            $this->model_catalog_product->updateQty($product_info['product_id'], $qty);
+		            endif;
+		            	
+	            }
+            endif;
+            
 
             $order_data['products'][] = array(
                 'product_id' => $product['product_id'],

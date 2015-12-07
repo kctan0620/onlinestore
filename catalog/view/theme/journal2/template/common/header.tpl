@@ -90,7 +90,24 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 //--></script>
 <?php } ?>
 <?php endif; /* end v1541 compatibility */ ?>
-<?php echo $google_analytics; ?>
+
+<?php if(!empty($this->request->get['path']) && ($this->request->get['path'] == 173 || $this->request->get['path'] == 174 || $this->request->get['path'] == 175 || $this->request->get['path'] == 176)): ?>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-70174013-1', 'auto');
+	  ga('send', 'pageview');
+	
+	</script>
+<?php else:?>
+
+	<?php echo $google_analytics; ?>
+
+<?php endif;?>
+
 <script>
     <?php if ($this->journal2->settings->get('show_countdown', 'never') !== 'never' || $this->journal2->settings->get('show_countdown_product_page', 'on') == 'on'): ?>
     Journal.COUNTDOWN = {
@@ -108,8 +125,11 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 
 <?php if(!empty($this->request->get['path']) && $this->request->get['path'] == 173): ?>
-<!--body style="background-color: #0099CC;background-image: url('image/catalog/blue.jpg') ">-->
-<body>
+<body style="background-color: #0099CC;background-image: none;">
+<!--body style="background-color: #0099CC;background-image: url('image/catalog/blue.jpg') "-->
+<?php elseif(!empty($this->request->get['path']) && $this->request->get['path'] == 179): ?>
+<body style="background-color: #000;background-image: none;">
+<!--body style="background-color: #0099CC;background-image: url('image/catalog/blue.jpg') "-->
 <?php else:?>
 <body>
 <?php endif;?>
@@ -192,9 +212,9 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 <div class="right_adv">
 		<?php if(!empty($this->request->get['path']) && $this->request->get['path'] == 173): ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/right_windows_10.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>			
+			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/lazada_voucher.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>			
 		<?php else: ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/right_windows_10.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>
+			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/lazada_voucher.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>
 		<?php endif;?>			
 </div>
 <div class="extended-container">

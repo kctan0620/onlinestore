@@ -330,10 +330,10 @@ class ControllerModuleJournal2Carousel extends Controller {
                 $date_end = false;
                 if ($special) {
                     $date_end = $this->model_journal2_product->getSpecialCountdown($product['product_id']);
-                    if ($todays_specials && date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")) !== date('Y-m-d', strtotime($date_end))) {
+                    if ($todays_specials && date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s'). "+1 days")) !== date('Y-m-d H:i:s', strtotime($date_end))) {
                         continue;
                     }
-                    if ($date_end === '0000-00-00') {
+                    if ($date_end === '0000-00-00 00:00:00') {
                         $date_end = false;
                     }
                     if ($this->journal2->settings->get('show_countdown', 'never') === 'never') {

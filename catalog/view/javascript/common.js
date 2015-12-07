@@ -23,6 +23,9 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
+	$(".pictureTrigger").hover(function(){
+		$( "#wallpaperamIMage" ).toggle();
+	});
 	// Adding the clear Fix
 	cols1 = $('#column-right, #column-left').length;
 	

@@ -61,6 +61,7 @@
         </div>
         <input type="hidden" name="code" value="" />
         <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
-    </div>
+    </div>   
+    
 </form>
 <?php endif; ?>

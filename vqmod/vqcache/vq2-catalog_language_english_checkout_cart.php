@@ -37,6 +37,9 @@ $_['column_total']             = 'Total';
 // Error
 $_['error_stock']              = 'Products marked with *** are not available in the desired quantity or not in stock!';
 
+$_['error_max_qty']   = 'Maximum order amount for %s is %s!';	
+            
+
 			/* RESTRICTED SHOPPING */
 $_['error_restrict']         = 'Due to security you have no rights to buy products during %s hours from your last purchase.';
 /* RESTRICTED SHOPPING END */

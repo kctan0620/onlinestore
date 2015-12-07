@@ -59,7 +59,11 @@
             </address></td>
           <td><address>
             <?php echo $order['shipping_address']; ?>
-            </address></td>
+            </address>
+            
+            <?php echo $text_telephone .' '.$order['telephone'];?></br>
+            <?php echo $text_email .' '.$order['email'];?>
+           </td>
         </tr>
       </tbody>
     </table>

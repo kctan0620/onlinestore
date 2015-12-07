@@ -50,13 +50,15 @@ class ControllerAccountSerialkeys extends Controller {
 		$data['text_instructions'] = $this->language->get('text_instructions');
 		$data['text_downloadlink'] = $this->language->get('text_downloadlink');
 		$data['text_dateoforder'] = $this->language->get('text_dateoforder');
+		$data['text_empty'] = $this->language->get('text_empty');
 
 			$data['serialkeys'] = array();
 
 			$results = $this->model_account_serial_keys->getSerialkeys(0, 100);
 
+			
 			foreach ($results as $result) {
-
+				
 				$data['serialkeys'][] = array(
 					'order_id'   => $result['order_id'],
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -68,8 +70,6 @@ class ControllerAccountSerialkeys extends Controller {
 				);
 
 			}
-
-
 
 
 			$pagination = new Pagination();

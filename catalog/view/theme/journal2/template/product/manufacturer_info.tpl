@@ -14,6 +14,13 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>">
+    
+    	<?php if($heading_title == 'Microsoft'):?>
+    	
+    	<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=2_15_155"><img src="http://www.tmt.my/onlinestore/image/Slider%20Banner/Slider%20for%20new%20Web.jpg" id="storeHeader_SideBanners_imgLeftBannerImage" alt="Microsoft Surface Pro 4" width="100%" height="300px"></a>
+    	
+    	<?php endif; ?>
+    
       <h1 class="heading-title"><?php echo $heading_title; ?></h1>
       <?php echo $content_top; ?>
       <?php if ($products) { ?>

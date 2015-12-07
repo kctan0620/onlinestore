@@ -18,6 +18,7 @@ $_['text_amount']            = 'Fixed Amount';
 // Column
 $_['column_name']            = 'Product Name';
 $_['column_model']           = 'Model';
+$_['column_sku']           	 = 'Sku';
 $_['column_image']           = 'Image';
 $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
@@ -50,6 +51,9 @@ $_['entry_manufacturer']     = 'Manufacturer';
 $_['entry_store']            = 'Stores';
 $_['entry_date_available']   = 'Date Available';
 $_['entry_quantity']         = 'Quantity';
+
+$_['entry_maximum']          = 'Maximum Quantity';
+            
 $_['entry_minimum']          = 'Minimum Quantity';
 $_['entry_stock_status']     = 'Out Of Stock Status';
 $_['entry_price']            = 'Price';
@@ -85,6 +89,11 @@ $_['entry_tag']          	 = 'Product Tags';
 $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
+$_['entry_ontime_close']     = 'Ontime Close';
+$_['entry_ontime_deduct']    = 'Ontime Deduct';
+
+
+
 
 // Help
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the keyword is globally unique.';
@@ -95,6 +104,9 @@ $_['help_jan']               = 'Japanese Article Number';
 $_['help_isbn']              = 'International Standard Book Number';
 $_['help_mpn']               = 'Manufacturer Part Number';
 $_['help_manufacturer']      = '(Autocomplete)';
+
+$_['help_maximum']           = 'Force a maximum ordered amount';
+			
 $_['help_minimum']           = 'Force a minimum ordered amount';
 $_['help_stock_status']      = 'Status shown when a product is out of stock';
 $_['help_points']            = 'Number of points needed to buy this item. If you don\'t want this product to be purchased with points leave as 0.';

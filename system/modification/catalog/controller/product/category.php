@@ -264,8 +264,7 @@ class ControllerProductCategory extends Controller {
 			$result_group1 = $this->model_catalog_product->getParticularProducts($arr_intel_group1);
 			$result_group2 = $this->model_catalog_product->getParticularProducts($arr_intel_group2);
 			$result_group3 = $this->model_catalog_product->getParticularProducts($arr_intel_group3);
-										
-			
+														
 			if ($result_group1) {
 				foreach ($result_group1 as $result) {
 					if ($result['image']) {
@@ -491,7 +490,707 @@ class ControllerProductCategory extends Controller {
 					}
 			}
 			
+			//Microsoft Page has specific products to feature into category page
+			$arr_microsoft_group1 = array(1947,1946,1948,1949); // Microsoft Surface Pro 4
+			$arr_microsoft_group2 = array(1714,1713,1710,1709); // Microsoft Surface Pro 3
+			$arr_microsoft_group3 = array(1707,1705,1706,590); // Type Cover
+			
+			$result_microsoft_group1 = $this->model_catalog_product->getParticularProducts($arr_microsoft_group1);
+			$result_microsoft_group2 = $this->model_catalog_product->getParticularProducts($arr_microsoft_group2);
+			$result_microsoft_group3 = $this->model_catalog_product->getParticularProducts($arr_microsoft_group3);
+			
+			if ($result_microsoft_group1) {
+				foreach ($result_microsoft_group1 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+			
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+			
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+			
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+			
+			
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+			
+			
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+			
+					$image2 = false;
+			
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					$data['products_microsoft_group1'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+			
+							'thumb2'       => $image2,
+			
+			
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+			
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+			
+							'date_end'       => $date_end,
+			
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+			
+			if ($result_microsoft_group2) {
+				foreach ($result_microsoft_group2 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+						
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+						
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+						
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+						
+						
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+						
+						
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+						
+					$image2 = false;
+						
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					$data['products_microsoft_group2'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+								
+							'thumb2'       => $image2,
+								
+								
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+								
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+								
+							'date_end'       => $date_end,
+								
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+			
+			if ($result_microsoft_group3) {
+				foreach ($result_microsoft_group3 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+						
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+						
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+						
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+						
+						
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+						
+						
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+						
+					$image2 = false;
+						
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					$data['products_microsoft_group3'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+								
+							'thumb2'       => $image2,
+								
+								
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+								
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+								
+							'date_end'       => $date_end,
+								
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}	
+			
+			
+			//Gaming Page has specific products to feature into category page
+			
+			$arr_gaming_group1 = array(2601,2576,2600,2574,2575,2595,2596,2597,2598,2599,2578,371,234,2576,2577,2573); // DOTA 2
+			//$arr_gaming_group1 = array(2570,2571,2572,2574,2575,2595,2596,2597,2598,2599,2578,371,234,2576,2577,2573); // DOTA 2
+			$arr_gaming_group2 = array(1364,1937,1367,2569,1938,1939,1940,1941); // Game Code
+			$arr_gaming_group3 = array(2582,2585,2586,2590,2591,2592,2593,2594); // TOS & Card Game
+			$arr_gaming_group4 = array(2584,2583,2587,2588,2589,1138,1080,1082); // Gaming PC & Laptop
+			$arr_gaming_group5 = array(2580,1839,577,1969,2581,14,1669,2579); // Gaming Keyboard & Mouse
+			$arr_gaming_group6 = array(1707,1705,1706,590); // Type Cover
+			
+			$result_gaming_group1 = $this->model_catalog_product->getParticularProducts($arr_gaming_group1);
+			$result_gaming_group2 = $this->model_catalog_product->getParticularProducts($arr_gaming_group2);
+			$result_gaming_group3 = $this->model_catalog_product->getParticularProducts($arr_gaming_group3);
+			$result_gaming_group4 = $this->model_catalog_product->getParticularProducts($arr_gaming_group4);
+			$result_gaming_group5 = $this->model_catalog_product->getParticularProducts($arr_gaming_group5);
+			$result_gaming_group6 = $this->model_catalog_product->getParticularProducts($arr_gaming_group6);
+			
+			if ($result_gaming_group1) {
+				foreach ($result_gaming_group1 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+						
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+						
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+						
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+						
+						
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+						
+						
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+						
+					$image2 = false;
+						
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					$data['products_gaming_group1'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+								
+							'thumb2'       => $image2,
+								
+								
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+								
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+								
+							'date_end'       => $date_end,
+								
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
 				
+			if ($result_gaming_group2) {
+				foreach ($result_gaming_group2 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+			
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+			
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+			
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+			
+			
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+			
+			
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+			
+					$image2 = false;
+			
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					$data['products_gaming_group2'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+			
+							'thumb2'       => $image2,
+			
+			
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+			
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+			
+							'date_end'       => $date_end,
+			
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+				
+			if ($result_gaming_group3) {
+				foreach ($result_gaming_group3 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+			
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+			
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+			
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+			
+			
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+			
+			
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+			
+					$image2 = false;
+			
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					$data['products_gaming_group3'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+			
+							'thumb2'       => $image2,
+			
+			
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+			
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+			
+							'date_end'       => $date_end,
+			
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+			
+			if ($result_gaming_group4) {
+				foreach ($result_gaming_group4 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+			
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+			
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+			
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+			
+			
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+			
+			
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+			
+					$image2 = false;
+			
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					$data['products_gaming_group4'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+			
+							'thumb2'       => $image2,
+			
+			
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+			
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+			
+							'date_end'       => $date_end,
+			
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+			
+			if ($result_gaming_group5) {
+				foreach ($result_gaming_group5 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+			
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+			
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+			
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+			
+			
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+			
+			
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+			
+					$image2 = false;
+			
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+			
+					$data['products_gaming_group5'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+			
+							'thumb2'       => $image2,
+			
+			
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+			
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+			
+							'date_end'       => $date_end,
+			
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
+			
+			if ($result_gaming_group6) {
+				foreach ($result_gaming_group6 as $result) {
+					if ($result['image']) {
+						$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					} else {
+						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
+						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$price = false;
+					}
+						
+					if ((float)$result['special']) {
+						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+					} else {
+						$special = false;
+					}
+						
+					if ($this->config->get('config_tax')) {
+						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
+					} else {
+						$tax = false;
+					}
+						
+					if ($this->config->get('config_review_status')) {
+						$rating = (int)$result['rating'];
+					} else {
+						$rating = false;
+					}
+						
+						
+					$date_end = false;
+					if (strpos($this->config->get('config_template'), 'journal2') === 0 && $special && $this->journal2->settings->get('show_countdown', 'never') !== 'never') {
+						$this->load->model('journal2/product');
+						$date_end = $this->model_journal2_product->getSpecialCountdown($result['product_id']);
+						if ($date_end === '0000-00-00') {
+							$date_end = false;
+						}
+					}
+						
+						
+					$additional_images = $this->model_catalog_product->getProductImages($result['product_id']);
+						
+					$image2 = false;
+						
+					if (count($additional_images) > 0) {
+						$image2 = $this->model_tool_image->resize($additional_images[0]['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
+					}
+						
+					$data['products_gaming_group6'][] = array(
+							'product_id'  => $result['product_id'],
+							'thumb'       => $image,
+								
+							'thumb2'       => $image2,
+								
+								
+							'labels'        => $this->model_journal2_product->getLabels($result['product_id']),
+								
+							'name'        => $result['name'],
+							'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
+							'price'       => $price,
+							'special'     => $special,
+								
+							'date_end'       => $date_end,
+								
+							'tax'         => $tax,
+							'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+							'rating'      => $result['rating'],
+							'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					);
+				}
+			}
 
 			$url = '';
 

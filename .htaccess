@@ -27,17 +27,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
 RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
-# REDIRECT NON-WWW
-#RewriteCond %{HTTP_HOST} ^tmt.my$
-#RewriteRule ^/?$ "http\:\/\/www\.tmt\.my" [R=301,L]
-#RewriteCond %{HTTP_HOST} !^www.tmt.my/$ [NC]
-#RewriteRule ^(.*)$ http://www.tmt.my/onlinestore/$1 [L,R=301]
 
-#REDIRECTbyIPSERVERONE
-RewriteEngine On
-RewriteBase /onlinestore/
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/onlinestore/$1 [R=301,L]
+
+
 
 ### Additional Settings that may need to be enabled for some servers 
 ### Uncomment the commands by removing the # sign in front of it.

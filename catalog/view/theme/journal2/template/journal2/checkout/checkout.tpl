@@ -231,6 +231,10 @@
 							alert(v);
 							return;
 						}
+						if(k === 'quantity') {
+							alert(v);
+							return;
+						}
                         if ($.inArray(k, ['payment_country', 'payment_zone', 'shipping_country', 'shipping_zone']) !== -1) {
                             k += '_id';
                         } else if (k.indexOf('custom_field') === 0) {

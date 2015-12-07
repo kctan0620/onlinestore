@@ -36,6 +36,11 @@ class ControllerCheckoutCheckout extends Controller {
 				}
 			}
 
+
+			if (($product['maximum']) > 0 && ($product['maximum']) < ($product_total)) {
+				$this->response->redirect($this->url->link('checkout/cart'));
+			}			
+            
 			if ($product['minimum'] > $product_total) {
 				$this->response->redirect($this->url->link('checkout/cart'));
 			}

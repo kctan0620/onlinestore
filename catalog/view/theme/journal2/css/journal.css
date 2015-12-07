@@ -690,19 +690,65 @@ OC 2
 
 .i6 body, .ie7 body, .ie8 body {
   padding-top: 60px; }
+@media (max-width: 767px) and (min-width: 602px) {  
+	.left_adv, .left_adv img{
+		display: none;
+	}
+	.right_adv, .right_adv img{
+		display: none;
+	}	
+}
 
-.left_adv {
+@media (max-width: 601px) and (min-width: 360px) {    
+	.left_adv {
+		display: none;
+	}
+	.right_adv {
+		display: none;
+	}
+}
+
+/* tablets */
+@media (max-width: 991px) and (min-width: 768px) {
+	.left_adv {
+		display: none;
+	}
+	.right_adv {
+		display: none;
+	}
+}
+
+/* laptops */
+@media (max-width: 1023px) and (min-width: 992px) {
+	 .left_adv {
 	position: fixed;
 	top: 104px;
 	left: 1px;
 	z-index: 1044;
-}
+	}
 
-.right_adv {
+	.right_adv {
+		position: fixed;
+		top: 104px;
+		right: 1px;
+		z-index: 1044;
+	}
+}
+/* desktops */
+@media (min-width: 1024px) {
+    .left_adv {
 	position: fixed;
 	top: 104px;
-	right: 1px;
+	left: 1px;
 	z-index: 1044;
+	}
+
+	.right_adv {
+		position: fixed;
+		top: 104px;
+		right: 1px;
+		z-index: 1044;
+	}
 }
 
 a:hover img{
@@ -712,4 +758,102 @@ a:hover img{
     -webkit-transition: all 0.4s ease-out;  /* Saf3.2+, Chrome */
     -ms-transition: all 0.4s ease-out;  /* IE10? */
     transition: all 0.4s ease-out;  
+}
+
+.intel_button{
+	background-color: #0071C5;
+	border: 0px;
+}
+
+.intel_button .button-cart-text{
+	color: #fff;
+	
+}
+			
+#footerSlideContainer {
+	position: fixed;
+	bottom:0;
+	width: 100%;
+	z-index:1050;
+}
+#footerSlideButton {
+	background: url(../../../../../image/sliderBtn.png) no-repeat transparent;
+	position: absolute;
+	top: -40px;
+	right: 150px;
+	width:50px;
+	height:50px;
+	border: none;
+	cursor: pointer;
+	z-index:1050;
+}
+#footerSlideContent {
+	width: 100%;
+	height: 0px;
+	background: #00AAFF;
+	color: #CCCCCC;
+	font-size: 0.8em;
+	border: none;
+	font-family: DejaVuSansBook, Sans-Serif;
+	-webkit-transition: height 300ms ease-in;
+	-moz-transition: height 300ms ease-in;
+	-ms-transition: height 300ms ease-in;
+	-o-transition: height 300ms ease-in;
+	transition: height 300ms ease-in;
+}
+#footerSlideContent.open {
+	height: 100px;
+}
+#footerSlideContent h3 {
+	font-size: 20px;
+	color: #9AC941;
+	margin: 10px 0 10px 0;
+}
+#footerSlideContent p {
+	font-size: 13px;
+	color: #fff;
+}
+#footerSlideContent ul {
+	color: #EE8D40;
+	list-style-type: none;
+	line-height: 2em;
+}
+#footerSlideText {
+	padding: 5px 10px 25px 25px;
+}
+#warranty{
+	text-align: left;
+}
+#warranty p{
+	text-shadow: none;
+	color: #ffffff;
+	background-color: none;	
+}
+
+@media (min-width: 768px) {
+	#input-warranty-invoiceno, #input-warranty-name, #input-warranty-ic, #input-warranty-telephone, #input-warranty-email, #input-warranty-address{
+		width: 50%;
+	}
+}
+
+@media (max-width: 767px) {
+	#input-warranty-invoiceno, #input-warranty-name, #input-warranty-ic, #input-warranty-telephone, #input-warranty-email, #input-warranty-address{
+		width: 100%;
+	}
+}
+
+span {
+    position: relative;
+}
+
+span.imgText img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+}
+
+.secondary-title a{
+	color: #fff;	
 }

@@ -103,8 +103,8 @@ class ModelJournal2Product extends Model {
         } else {
             $customer_group_id = $this->config->get('config_customer_group_id');
         }
-        $query = $this->db->query("SELECT date_end FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = '" . (int)$product_id . "' AND ps.customer_group_id = '" . (int)$customer_group_id . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1");
-        if (!isset($query->row['date_end']) || $query->row['date_end'] === '0000-00-00') {
+        $query = $this->db->query("SELECT date_end FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = '" . (int)$product_id . "' AND ps.customer_group_id = '" . (int)$customer_group_id . "' AND ((ps.date_start = '0000-00-00 00:00:00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00 00:00:00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1");
+        if (!isset($query->row['date_end']) || $query->row['date_end'] === '0000-00-00 00:00:00') {
             return false;
         }
         return date('D M d Y H:i:s O', strtotime($query->row['date_end']));
@@ -131,7 +131,7 @@ class ModelJournal2Product extends Model {
             $sql .= " LEFT JOIN " . DB_PREFIX ."product_to_category p2c ON (p.product_id = p2c.product_id)";
         }
 
-        $sql .= " WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'";
+        $sql .= " WHERE p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND p.quantity > 0";
 
         if ($category_id !== -1) {
             $sql .= " AND p2c.category_id = '" . (int)$category_id . "'";
@@ -265,6 +265,7 @@ class ModelJournal2Product extends Model {
     public function getProductsByCategory($category_id, $limit = 5) {
         return $this->model_catalog_product->getProducts(array(
             'filter_category_id' => $category_id,
+        	'filter_quantity' => 1,	
             'start' => 0,
             'limit' => $limit
         ));

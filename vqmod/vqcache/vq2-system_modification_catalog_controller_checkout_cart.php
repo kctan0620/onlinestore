@@ -100,6 +100,11 @@ class ControllerCheckoutCart extends Controller {
 					$data['error_warning'] = sprintf($this->language->get('error_minimum'), $product['name'], $product['minimum']);
 				}
 
+
+				if (($product['maximum']) > 0 && ($product['maximum']) < ($product_total)) {
+					$data['error_warning'] = sprintf($this->language->get('error_max_qty'), $product['name'], $product['maximum']);
+				}
+            
 				if ($product['image']) {
 					$image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_cart_width'), $this->config->get('config_image_cart_height'));
 				} else {
@@ -310,6 +315,21 @@ class ControllerCheckoutCart extends Controller {
 				$quantity = $product_info['minimum'] ? $product_info['minimum'] : 1;
 			}
 
+
+				$product_total = 0;
+				
+				$products = $this->cart->getProducts();
+				
+				foreach ($products as $product_2) {
+					if ($product_2['product_id'] == $this->request->post['product_id']) {
+						$product_total += $product_2['quantity'];
+					}
+				}
+			
+				if (($product_info['maximum']) > 0 && ($product_info['maximum']) < ($product_total + $quantity)) {
+					$json['error']['warning'] = sprintf($this->language->get('error_max_qty'), $product_info['name'], $product_info['maximum']);
+				}
+            
 			if (isset($this->request->post['option'])) {
 				$option = array_filter($this->request->post['option']);
 			} else {
@@ -319,6 +339,11 @@ class ControllerCheckoutCart extends Controller {
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
 
 			foreach ($product_options as $product_option) {
+
+				if (($product_info['maximum']) > 0 && ($product_info['maximum']) < ($product_total + $quantity)) {
+					$json['error']['warning'] = sprintf($this->language->get('error_max_qty'), $product_info['name'], $product_info['maximum']);
+				}
+            
 				if ($product_option['required'] && empty($option[$product_option['product_option_id']])) {
 					$json['error']['option'][$product_option['product_option_id']] = sprintf($this->language->get('error_required'), $product_option['name']);
 				}
@@ -346,6 +371,12 @@ class ControllerCheckoutCart extends Controller {
 
 			if (!$json) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $recurring_id);
+				
+				// added by KC - for Flash Sales purpose
+// 				$qty = 0;
+// 				if($product_info['ontime_deduct']):
+// 					$this->model_catalog_product->updateQty($product_info['product_id']);					
+// 				endif;
 
 
                 if (strpos($this->config->get('config_template'), 'journal2') === 0) {

@@ -476,6 +476,7 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
+		$data['sort_id'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.product_id' . $url, 'SSL');
 		$data['sort_name'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=pd.name' . $url, 'SSL');
 		$data['sort_model'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.model' . $url, 'SSL');
 		$data['sort_sku'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.sku' . $url, 'SSL');
@@ -616,6 +617,8 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_ontime_close'] = $this->language->get('entry_ontime_close');
+		$data['entry_ontime_deduct'] = $this->language->get('entry_ontime_deduct');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -968,6 +971,22 @@ class ControllerCatalogProduct extends Controller {
 			$data['status'] = $product_info['status'];
 		} else {
 			$data['status'] = true;
+		}
+		
+		if (isset($this->request->post['ontime_close'])) {
+			$data['ontime_close'] = $this->request->post['ontime_close'];
+		} elseif (!empty($product_info)) {
+			$data['ontime_close'] = $product_info['ontime_close'];
+		} else {
+			$data['ontime_close'] = true;
+		}
+		
+		if (isset($this->request->post['ontime_deduct'])) {
+			$data['ontime_deduct'] = $this->request->post['ontime_deduct'];
+		} elseif (!empty($product_info)) {
+			$data['ontime_deduct'] = $product_info['ontime_deduct'];
+		} else {
+			$data['ontime_deduct'] = true;
 		}
 
 		if (isset($this->request->post['weight'])) {

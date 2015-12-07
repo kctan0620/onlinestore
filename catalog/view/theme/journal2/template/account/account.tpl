@@ -37,6 +37,7 @@
         <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
         <li><a href="<?php echo $transaction; ?>"><?php echo $text_transaction; ?></a></li>
         <li><a href="<?php echo $recurring; ?>"><?php echo $text_recurring; ?></a></li>
+        <li><a href="<?php echo $warranty; ?>"><?php echo $text_ewarranty; ?></a></li>
       </ul>
       </div>
       <h2 class="secondary-title"><?php echo $text_my_newsletter; ?></h2>

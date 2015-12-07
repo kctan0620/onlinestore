@@ -647,7 +647,7 @@ class ModelCheckoutOrder extends Model {
 
 
 
-			if ($order_status_id == $this->config->get('config_complete_status')) {
+			if ($order_status_id == $this->config->get('config_complete_status')[0]) {
 
 				$message .= $language->get('text_new_link2') . "\n";
 				$message .= html_entity_decode($order_info['store_url'] . 'index.php?route=account/serial_keys', ENT_QUOTES, 'UTF-8') . "\n\n";

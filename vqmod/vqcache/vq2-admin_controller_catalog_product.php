@@ -273,6 +273,12 @@ $this->checkSerialkeysTables();
 		} else {
 			$filter_model = null;
 		}
+		
+		if (isset($this->request->get['filter_sku'])) {
+			$filter_sku = $this->request->get['filter_sku'];
+		} else {
+			$filter_sku = null;
+		}
 
 		if (isset($this->request->get['filter_price'])) {
 			$filter_price = $this->request->get['filter_price'];
@@ -327,6 +333,10 @@ $this->checkSerialkeysTables();
 
 		if (isset($this->request->get['filter_model'])) {
 			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+		
+		if (isset($this->request->get['filter_sku'])) {
+			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -383,6 +393,7 @@ $this->checkSerialkeysTables();
 		$filter_data = array(
 			'filter_name'	  => $filter_name,
 			'filter_model'	  => $filter_model,
+			'filter_sku'	  => $filter_sku,
 			'filter_price'	  => $filter_price,
 			'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
@@ -422,6 +433,7 @@ $this->checkSerialkeysTables();
 				'image'      => $image,
 				'name'       => $result['name'],
 				'model'      => $result['model'],
+				'sku'      	 => $result['sku'],
 				'price'      => $result['price'],
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
@@ -442,6 +454,7 @@ $this->checkSerialkeysTables();
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_model'] = $this->language->get('column_model');
+		$data['column_sku'] = $this->language->get('column_sku');
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_quantity'] = $this->language->get('column_quantity');
 		$data['column_status'] = $this->language->get('column_status');
@@ -449,6 +462,7 @@ $this->checkSerialkeysTables();
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_model'] = $this->language->get('entry_model');
+		$data['entry_sku'] = $this->language->get('entry_sku');
 		$data['entry_price'] = $this->language->get('entry_price');
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
 		$data['entry_status'] = $this->language->get('entry_status');
@@ -498,6 +512,10 @@ $this->checkSerialkeysTables();
 		if (isset($this->request->get['filter_model'])) {
 			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
 		}
+		
+		if (isset($this->request->get['filter_sku'])) {
+			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
+		}
 
 		if (isset($this->request->get['filter_price'])) {
 			$url .= '&filter_price=' . $this->request->get['filter_price'];
@@ -530,8 +548,10 @@ $this->checkSerialkeysTables();
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
+		$data['sort_id'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.product_id' . $url, 'SSL');
 		$data['sort_name'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=pd.name' . $url, 'SSL');
 		$data['sort_model'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.model' . $url, 'SSL');
+		$data['sort_sku'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.sku' . $url, 'SSL');
 		$data['sort_price'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.price' . $url, 'SSL');
 		$data['sort_quantity'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.quantity' . $url, 'SSL');
 		$data['sort_status'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status' . $url, 'SSL');
@@ -545,6 +565,10 @@ $this->checkSerialkeysTables();
 
 		if (isset($this->request->get['filter_model'])) {
 			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+		
+		if (isset($this->request->get['filter_sku'])) {
+			$url .= '&filter_sku=' . urlencode(html_entity_decode($this->request->get['filter_sku'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_price'])) {
@@ -579,6 +603,7 @@ $this->checkSerialkeysTables();
 
 		$data['filter_name'] = $filter_name;
 		$data['filter_model'] = $filter_model;
+		$data['filter_sku'] = $filter_sku;
 		$data['filter_price'] = $filter_price;
 		$data['filter_quantity'] = $filter_quantity;
 		$data['filter_status'] = $filter_status;
@@ -638,6 +663,9 @@ $this->checkSerialkeysTables();
 		$data['entry_mpn'] = $this->language->get('entry_mpn');
 		$data['entry_location'] = $this->language->get('entry_location');
 		$data['entry_minimum'] = $this->language->get('entry_minimum');
+
+		$data['entry_maximum'] = $this->language->get('entry_maximum');
+            
 		$data['entry_shipping'] = $this->language->get('entry_shipping');
 		$data['entry_date_available'] = $this->language->get('entry_date_available');
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
@@ -676,6 +704,8 @@ $this->checkSerialkeysTables();
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_ontime_close'] = $this->language->get('entry_ontime_close');
+		$data['entry_ontime_deduct'] = $this->language->get('entry_ontime_deduct');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -684,6 +714,9 @@ $this->checkSerialkeysTables();
 		$data['help_jan'] = $this->language->get('help_jan');
 		$data['help_isbn'] = $this->language->get('help_isbn');
 		$data['help_mpn'] = $this->language->get('help_mpn');
+
+		$data['help_maximum'] = $this->language->get('help_maximum');
+            
 		$data['help_minimum'] = $this->language->get('help_minimum');
 		$data['help_manufacturer'] = $this->language->get('help_manufacturer');
 		$data['help_stock_status'] = $this->language->get('help_stock_status');
@@ -1020,6 +1053,15 @@ $this->checkSerialkeysTables();
 			$data['quantity'] = 1;
 		}
 
+
+		if (isset($this->request->post['maximum'])) {
+      		$data['maximum'] = $this->request->post['maximum'];
+    	} elseif (isset($product_info)) {
+      		$data['maximum'] = $product_info['maximum'];
+    	} else {
+			$data['maximum'] = 0;
+		}
+            
 		if (isset($this->request->post['minimum'])) {
 			$data['minimum'] = $this->request->post['minimum'];
 		} elseif (!empty($product_info)) {
@@ -1062,6 +1104,22 @@ $this->checkSerialkeysTables();
 			$data['status'] = $product_info['status'];
 		} else {
 			$data['status'] = true;
+		}
+		
+		if (isset($this->request->post['ontime_close'])) {
+			$data['ontime_close'] = $this->request->post['ontime_close'];
+		} elseif (!empty($product_info)) {
+			$data['ontime_close'] = $product_info['ontime_close'];
+		} else {
+			$data['ontime_close'] = true;
+		}
+		
+		if (isset($this->request->post['ontime_deduct'])) {
+			$data['ontime_deduct'] = $this->request->post['ontime_deduct'];
+		} elseif (!empty($product_info)) {
+			$data['ontime_deduct'] = $product_info['ontime_deduct'];
+		} else {
+			$data['ontime_deduct'] = true;
 		}
 
 		if (isset($this->request->post['weight'])) {

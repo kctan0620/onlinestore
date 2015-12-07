@@ -326,6 +326,37 @@
                   <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
                 </div>
               </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-deduct"><?php echo $entry_ontime_deduct; ?> *Flash sales auto deduct quantity when confirm order*</label>
+                <div class="col-sm-10">
+                  <select name="ontime_deduct" id="input-deduct" class="form-control">
+                    <?php if ($ontime_deduct) { ?>
+                    <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                    <option value="0"><?php echo $text_disabled; ?></option>
+                    <?php } else { ?>
+                    <option value="1"><?php echo $text_enabled; ?></option>
+                    <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-deduct"><?php echo $entry_ontime_close; ?> *Flash Sales direct quantity deduct 1 when add to cart*</label>
+                <div class="col-sm-10">
+                  <select name="ontime_close" id="input-close" class="form-control">
+                    <?php if ($ontime_close) { ?>
+                    <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                    <option value="0"><?php echo $text_disabled; ?></option>
+                    <?php } else { ?>
+                    <option value="1"><?php echo $text_enabled; ?></option>
+                    <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              
             </div>
             <div class="tab-pane" id="tab-links">
               <div class="form-group">
@@ -761,6 +792,7 @@
             </div>
             <div class="tab-pane" id="tab-special">
               <div class="table-responsive">
+                
                 <table id="special" class="table table-striped table-bordered table-hover">
                   <thead>
                     <tr>
@@ -788,12 +820,12 @@
                       <td class="text-right"><input type="text" name="product_special[<?php echo $special_row; ?>][priority]" value="<?php echo $product_special['priority']; ?>" placeholder="<?php echo $entry_quantity; ?>" class="form-control" /></td>
                       <td class="text-right"><input type="text" name="product_special[<?php echo $special_row; ?>][price]" value="<?php echo $product_special['price']; ?>" placeholder="<?php echo $entry_price; ?>" class="form-control" /></td>
                       <td class="text-left" style="width: 20%;"><div class="input-group date">
-                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_start]" value="<?php echo $product_special['date_start']; ?>" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD" class="form-control" />
+                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_start]" value="<?php echo $product_special['date_start']; ?>" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_start[<?php echo $special_row; ?>]" class="form-control" />
                           <span class="input-group-btn">
                           <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                           </span></div></td>
                       <td class="text-left" style="width: 20%;"><div class="input-group date">
-                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_end]" value="<?php echo $product_special['date_end']; ?>" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD" class="form-control" />
+                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_end]" value="<?php echo $product_special['date_end']; ?>" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_end[<?php echo $special_row; ?>]" class="form-control" />
                           <span class="input-group-btn">
                           <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                           </span></div></td>
@@ -1324,19 +1356,32 @@ function addSpecial() {
     html += '  </select></td>';		
     html += '  <td class="text-right"><input type="text" name="product_special[' + special_row + '][priority]" value="" placeholder="<?php echo $entry_priority; ?>" class="form-control" /></td>';
 	html += '  <td class="text-right"><input type="text" name="product_special[' + special_row + '][price]" value="" placeholder="<?php echo $entry_price; ?>" class="form-control" /></td>';
-    html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-	html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+    html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_start[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+	html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_end[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#special-row' + special_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
 	
 	$('#special tbody').append(html);
 
 	$('.date').datetimepicker({
-		pickTime: false
+		pickTime: true		
 	});
-		
+
+	
+	
 	special_row++;
 }
+
+	var start = "datetimepicker_start[" + special_row + "]";
+	var end = "datetimepicker_end[' + special_row + ']";
+
+	$('#datetimepicker_start['+ special_row + ']').datetimepicker({
+			pickTime: true		
+	});
+	
+	$('#datetimepicker_end[' + special_row + ']').datetimepicker({
+			pickTime: true		
+	});
 //--></script> 
   <script type="text/javascript"><!--
 var image_row = <?php echo $image_row; ?>;

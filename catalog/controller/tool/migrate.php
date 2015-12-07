@@ -6,7 +6,7 @@ class ControllerToolMigrate extends Controller {
 									
         $filter_data = array(
                 'start'              => 0,
-        		'limit'              => 2000
+        		'limit'              => 1000
         );	
 
         //$number = 1;
@@ -72,7 +72,7 @@ class ControllerToolMigrate extends Controller {
 
         		$content = file_get_contents($newLink);
         
-	        	$imath_path = DIR_IMAGE."/catalog/201511028/";
+	        	$imath_path = DIR_IMAGE."/catalog/201511208/";
 	        		
 	        	if (!file_exists($imath_path)) {
 	        		mkdir($imath_path, 0777, true);
