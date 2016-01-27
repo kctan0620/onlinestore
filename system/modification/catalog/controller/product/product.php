@@ -357,6 +357,14 @@ $data['thumb_fixed'] = $this->model_tool_image->resize($product_info['image'], $
 			} else {
 				$data['special'] = false;
 			}
+			
+			//KC added
+			if((float)$product_info['special']){
+				$installment = $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
+			}else{
+				$installment = $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'));
+			}
+			$data['installment'] = $installment;
 
 			if ($this->config->get('config_tax')) {
 				$data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price']);

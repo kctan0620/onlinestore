@@ -221,7 +221,7 @@ body {
   text-overflow: ellipsis; }
 
 .heading-title {
-  margin-bottom: 17px; }
+  margin-bottom: -10px; }
 
 .secondary-title {
   font-family: Helvetica, Arial, sans-serif;

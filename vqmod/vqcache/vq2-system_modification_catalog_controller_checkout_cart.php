@@ -372,11 +372,11 @@ class ControllerCheckoutCart extends Controller {
 			if (!$json) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $recurring_id);
 				
-				// added by KC - for Flash Sales purpose
-// 				$qty = 0;
-// 				if($product_info['ontime_deduct']):
-// 					$this->model_catalog_product->updateQty($product_info['product_id']);					
-// 				endif;
+				// added by KC - for Flash Sales purpose								
+				if($product_info['ontime_close']):
+					$this->model_catalog_product->updateQtyBeZero($product_info['product_id']);					
+				endif;
+				
 
 
                 if (strpos($this->config->get('config_template'), 'journal2') === 0) {

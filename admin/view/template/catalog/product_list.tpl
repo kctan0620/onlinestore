@@ -67,7 +67,8 @@
         </div>
         
         <div class="container-fluid">
-	        <div class="pull-right"><a href="<?php echo $add; ?>" data-toggle="tooltip" title="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+	        <div class="pull-right"><a href="<?php echo $add; ?>" data-toggle="tooltip" title="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>	        
+	        <button type="button" data-toggle="tooltip" title="<?php echo $button_update; ?>" class="btn btn-default" onclick="$('#form-product').attr('action', '<?php echo $update; ?>').submit()"><i class="fa fa-edit"></i></button>	       
 	        <button type="button" data-toggle="tooltip" title="<?php echo $button_copy; ?>" class="btn btn-default" onclick="$('#form-product').attr('action', '<?php echo $copy; ?>').submit()"><i class="fa fa-copy"></i></button>
 	        <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-product').submit() : false;"><i class="fa fa-trash-o"></i></button>
 	      	</div>
@@ -89,7 +90,7 @@
                   
                   </td>
                   <td class="text-center"><?php echo $column_image; ?></td>
-                  <td class="text-left"><?php if ($sort == 'pd.name') { ?>
+                  <td class="text-left" width="40%"><?php if ($sort == 'pd.name') { ?>
                     <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
@@ -109,7 +110,7 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
                     <?php } ?></td>
-                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
+                  <td class="text-left" width="15%"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
@@ -150,7 +151,29 @@
                     <?php } else { ?>
                     <span class="label label-success"><?php echo $product['quantity']; ?></span>
                     <?php } ?></td>
-                  <td class="text-left"><?php echo $product['status']; ?></td>
+                  <td class="text-left">
+                  <?php echo $product['status']?>
+                  	                  	                  	                  	
+                  	<select name="status_id_<?php echo $product['product_id']?>" id="input-status-class" class="form-control">
+	                  		                  	
+	                  <?php if ($product['status'] == 'Enabled') { ?>
+	                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+	                  
+	                  <?php } else { ?>
+	                  <option value="1"><?php echo $text_enabled; ?></option>
+	                  
+	                  <?php } ?>
+	                  <?php if ($product['status'] == 'Disabled') { ?>
+	                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+	                  
+	                  <?php } else { ?>
+	                  <option value="0"><?php echo $text_disabled; ?></option>
+	                 
+	                  <?php } ?>
+	                  		                  			                
+                  	</select>                  	                  	
+                  	                  	                  	
+                  </td>
                   <td class="text-right"><a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 <?php } ?>

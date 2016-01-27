@@ -12,11 +12,11 @@ class ControllerToolMigrate extends Controller {
         //$number = 1;
         //$number = 2;
         //$number = 3;
-        //$number = 4;
+        $number = 4;
         //$number = 5;
         //$number = 6;
         //$number = 7;
-        $number = 8;
+        //$number = 8;
         
         
 		/* $results = $this->model_catalog_product->getProductsImage($filter_data);	
@@ -72,7 +72,7 @@ class ControllerToolMigrate extends Controller {
 
         		$content = file_get_contents($newLink);
         
-	        	$imath_path = DIR_IMAGE."/catalog/201511208/";
+	        	$imath_path = DIR_IMAGE."/catalog/201512084/";
 	        		
 	        	if (!file_exists($imath_path)) {
 	        		mkdir($imath_path, 0777, true);

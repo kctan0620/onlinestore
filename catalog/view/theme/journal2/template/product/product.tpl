@@ -1,4 +1,5 @@
 <?php echo $header; ?>
+<?php $arr_event_product = array(1852,2083,2620,2611,2618,2617,3654,3996,4027,4028,4029,4030,3985,4031,4083,3989,4032,4033,3987,4034,4035,4028,4037,4059,3988,4039,4040,4028,4041,4042,3990,4043,4044,4028,4045,4085,4060);?>
 <div id="container" class="container j-container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -33,7 +34,19 @@
             <?php if (isset($labels) && is_array($labels)): ?>
             <?php foreach ($labels as $label => $name): ?>
             <?php if ($label === 'outofstock'): ?>
-            <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="z-index: 100000; position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+            <?php 
+              		if(in_array($product_id, $arr_event_product)): 				              
+              ?>
+              		<img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+              <?php 
+              		else:
+              ?>
+              
+              <!--img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" /-->
+              
+              <?php 		
+              		endif;
+            ?>
             <?php else: ?>
             <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
             <?php endif; ?>
@@ -306,9 +319,7 @@
             <?php } ?>
             <li class="p-stock"><?php echo $text_stock; ?> <span class="journal-stock <?php echo isset($stock_status) ? $stock_status : ''; ?>"><?php echo $stock; ?></span></li>
           </ul>
-          <?php if($this->journal2->settings->get('product_sold')): ?>
-          <div class="product-sold-count-text"><?php echo $this->journal2->settings->get('product_sold'); ?></div>
-          <?php endif; ?>
+          
           <?php if (isset($date_end) && $date_end && $this->journal2->settings->get('show_countdown_product_page', 'on') == 'on'): ?>
           <div class="countdown-wrapper"><div class="expire-text"><?php echo $this->journal2->settings->get('countdown_product_page_title'); ?></div><div class="countdown"></div></div>
           <script>Journal.countdown($('.right .countdown'), '<?php echo $date_end; ?>');</script>
@@ -338,6 +349,25 @@
             <?php } ?>
           </ul>
           <?php } ?>
+          
+          <?php 
+          	$display_price;  
+          	$half_year;
+          	$one_year;
+          	$two_year;        	
+          	
+          	$half_year = round(((float)$installment * 2.5 / 100) + ((float)$installment * 6 / 100), 2);
+          	$one_year = round(((float)$installment * 3.5 / 100) + ((float)$installment * 6 / 100), 2);
+          	$two_year = round(((float)$installment * 6.5 / 100) + ((float)$installment * 6 / 100), 2);
+
+          ?>
+          
+          <select>
+          		<option>6 Months: <?php echo $half_year?> / Month </option>
+          		<option>12 Months: <?php echo $one_year ?> / Month </option>
+          		<option>24 Months: <?php echo $two_year ?> / Month </option>
+          </select>
+          
           <?php if ($options) { ?>
             <div class="options <?php echo $this->journal2->settings->get('product_page_options_push_classes'); ?>">
             <h3><?php echo $text_option; ?></h3>
@@ -486,8 +516,15 @@
               <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
               <?php else: ?>
                 <span class="qty">
+              <?php if(!in_array($product_id, $arr_event_product)):?>
               <label class="control-label text-qty" for="input-quantity"><?php echo $entry_qty; ?></label>
               <input type="text" name="quantity" value="<?php echo $minimum; ?>" size="2" data-min-value="<?php echo $minimum; ?>" id="input-quantity" class="form-control" />
+              <?php else:?>
+                	<?php if ($special) { ?>
+	                	<label class="control-label text-qty" for="input-quantity"><?php echo $entry_qty; ?></label>
+              			<input type="text" name="quantity" value="<?php echo $minimum; ?>" size="2" data-min-value="<?php echo $minimum; ?>" id="input-quantity" class="form-control" />
+	                <?php }?>		                		                                	 
+              <?php endif;?>
               <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
               <script>
                 /* quantity buttons */
@@ -514,8 +551,15 @@
                   }
                 });
               </script>
-              </span>
-                <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="button"><span class="button-cart-text"><?php echo $button_cart; ?></span></button>
+              </span>            
+	              	<?php if(!in_array($product_id, $arr_event_product)):?>
+	                <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="button"><span class="button-cart-text"><?php echo $button_cart; ?></span></button>
+	                <?php else:?>
+	                	<?php if ($special) { ?>
+		                	<button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="button"><span class="button-cart-text"><?php echo $button_cart; ?></span></button>
+		                <?php }?>		                	
+		                
+	                <?php endif;?>	                	                	                	                
                 <?php endif; ?>
               </div>
             </div>
@@ -593,7 +637,20 @@
                   <?php if (isset($product['labels']) && is_array($product['labels'])): ?>
                   <?php foreach ($product['labels'] as $label => $name): ?>
                   <?php if ($label === 'outofstock'): ?>
-                  <img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+                  <?php 
+	              		$arr_product = array(3979,3980,3981,3984,3982);
+	              		if(in_array($product['product_id'], $arr_product)): 				              
+	              ?>
+	              		<img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" />
+	              <?php 
+	              		else:
+	              ?>
+	              
+	              <!--img class="outofstock" <?php echo Journal2Utils::getRibbonSize($this->journal2->settings->get('out_of_stock_ribbon_size')); ?> style="position: absolute; top: 0; left: 0" src="<?php echo Journal2Utils::generateRibbon($name, $this->journal2->settings->get('out_of_stock_ribbon_size'), $this->journal2->settings->get('out_of_stock_font_color'), $this->journal2->settings->get('out_of_stock_bg')); ?>" alt="" /-->
+	              
+	              <?php 		
+	              		endif;
+	              ?>
                   <?php else: ?>
                   <span class="label-<?php echo $label; ?>"><b><?php echo $name; ?></b></span>
                   <?php endif; ?>

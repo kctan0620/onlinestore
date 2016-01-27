@@ -154,13 +154,26 @@
               </div>
               <div class="button-group">
                 <?php if (Journal2Utils::isEnquiryProduct($this, $product['product_id'])): ?>
+                <?php if(product_id )?>
                 <div class="cart enquiry-button">
                   <a href="javascript:Journal.openPopup('<?php echo $this->journal2->settings->get('enquiry_popup_code'); ?>', '<?php echo $product['product_id']; ?>');" data-clk="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $this->journal2->settings->get('enquiry_button_text'); ?>"><?php echo $this->journal2->settings->get('enquiry_button_icon') . '<span class="button-cart-text">' . $this->journal2->settings->get('enquiry_button_text') . '</span>'; ?></a>
                 </div>
-                <?php else: ?>
+                <?php 
+                	else: 
+                	$arr_lu_products = array(3654, 2617, 2618, 2611, 2620, 2083, 3996,4027,4028,4029,4030,3985,4031,4083,3989,4032,4033,3987,4034,4035,4028, 4037,4059,3988,4039,4040,4028,4041,4042,3990,4043,4044,4028,4045,4085,4060); // Like and Unlock
+                	if(!in_array($product['product_id'], $arr_lu_products)):
+                ?>                
                 <div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
                   <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
-                </div>
+                </div>                
+                <?php else: ?>                
+                		<?php if ($product['special']) { ?>
+		                	<div class="cart <?php echo isset($product['labels']) && is_array($product['labels']) && isset($product['labels']['outofstock']) ? 'outofstock' : ''; ?>">
+			                  <a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button hint--top" data-hint="<?php echo $button_cart; ?>"><i class="button-left-icon"></i><span class="button-cart-text"><?php echo $button_cart; ?></span><i class="button-right-icon"></i></a>
+			                </div>
+		                <?php }?>	                
+                <?php endif;?>
+                
                 <?php endif; ?>
                 <div class="wishlist"><a onclick="addToWishList('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_wishlist; ?>"><i class="wishlist-icon"></i><span class="button-wishlist-text"><?php echo $button_wishlist;?></span></a></div>
                 <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');" class="hint--top" data-hint="<?php echo $button_compare; ?>"><i class="compare-icon"></i><span class="button-compare-text"><?php echo $button_compare;?></span></a></div>

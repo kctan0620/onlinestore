@@ -121,6 +121,7 @@
                         <select data-ng-model="column.width" ui-select2="{width: 50, minimumResultsForSearch: -1, placeholder: 'Choose Width'}">
                             <option value=""></option>
                             <option value="25">25%</option>
+                            <option value="30">30%</option>
                             <option value="33.33333">33%</option>
                             <option value="50">50%</option>
                             <option value="66.66666">66%</option>

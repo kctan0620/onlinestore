@@ -292,7 +292,7 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 
-	public function addOrderHistory($order_id, $order_status_id, $comment = '', $notify = false) {
+	public function addOrderHistory($order_id, $order_status_id, $comment = '', $notify = false) {		
 		$this->event->trigger('pre.order.history.add', $order_id);
 
 		$order_info = $this->getOrder($order_id);
@@ -619,8 +619,11 @@ class ModelCheckoutOrder extends Model {
 			$data['text_seriallink'] = $language->get('text_new_seriallink');
 			
 				$data['text_footer'] = $language->get('text_new_footer');
+				$data['text_survey'] = $language->get('text_survey');
 
 				$data['logo'] = $this->config->get('config_url') . 'image/' . $this->config->get('config_logo');
+				$data['logo_microsoft'] = $this->config->get('config_url') . 'image/manufacturer/Microsoft.png';
+				$data['logo_intel'] = $this->config->get('config_url') . 'image/manufacturer/Intel.png';
 				$data['store_name'] = $order_info['store_name'];
 				$data['store_url'] = $order_info['store_url'];
 				$data['customer_id'] = $order_info['customer_id'];
@@ -740,9 +743,17 @@ class ModelCheckoutOrder extends Model {
 
 				// Products
 				$data['products'] = array();
+				
+				//$arr_intel_product = array(1854,3061,3092,1888,1876,1852);
+				$arr_intel_product = array(1876,1854,1858,3092,4147);
+				$survey_mail = false;
 
 				foreach ($order_product_query->rows as $product) {
 					$option_data = array();
+					
+					if(in_array($product['product_id'], $arr_intel_product)):
+						$survey_mail = true;
+					endif;
 
 					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
 
@@ -777,6 +788,7 @@ class ModelCheckoutOrder extends Model {
 						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
 					);
 				}
+				
 
 				// Vouchers
 				$data['vouchers'] = array();
@@ -820,6 +832,12 @@ class ModelCheckoutOrder extends Model {
 					$html = $this->load->view($this->config->get('config_template') . '/template/mail/order.tpl', $data);
 				} else {
 					$html = $this->load->view('default/template/mail/order.tpl', $data);
+				}
+				
+				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/intel_survey.tpl')) {
+					$html_intel = $this->load->view($this->config->get('config_template') . '/template/mail/intel_survey.tpl', $data);
+				} else {
+					$html_intel = $this->load->view('default/template/mail/intel_survey.tpl', $data);
 				}
 
 				// Can not send confirmation emails for CBA orders as email is unknown
@@ -914,13 +932,14 @@ class ModelCheckoutOrder extends Model {
 					$mail->setHtml($html);
 					$mail->setText($text);
 					$mail->send();
+										
 				}
 
 				// Admin Alert Mail
 				if ($this->config->get('config_order_mail')) {
 					//$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_id);
 					// added by KC 10-09-2015
-					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_info['order_reference']);
+					$subject = sprintf($language->get('text_new_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'), $order_info['order_reference'].'Status is '.$survey_mail);
 					
 					// HTML Mail
 					$data['text_greeting'] = $language->get('text_new_received');
@@ -1015,6 +1034,26 @@ class ModelCheckoutOrder extends Model {
 					$mail->setHtml($html);
 					$mail->setText($text);
 					$mail->send();
+					
+					if($survey_mail):
+						$intel_mail = new Mail();
+						$intel_mail->protocol = $this->config->get('config_mail_protocol');
+						$intel_mail->parameter = $this->config->get('config_mail_parameter');
+						$intel_mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+						$intel_mail->smtp_username = $this->config->get('config_mail_smtp_username');
+						$intel_mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+						$intel_mail->smtp_port = $this->config->get('config_mail_smtp_port');
+						$intel_mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+							
+						$subject_intel = sprintf('Free Gift of Intel From TMT.MY');						
+						$intel_mail->setTo($order_info['email']);
+						$intel_mail->setFrom($this->config->get('config_email'));
+						$intel_mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
+						$intel_mail->setSubject(html_entity_decode($subject_intel, ENT_QUOTES, 'UTF-8'));
+						$intel_mail->setHtml($html_intel);
+						$intel_mail->setText($text);
+						$intel_mail->send();
+					endif;
 
 					// Send to additional alert emails
 					$emails = explode(',', $this->config->get('config_mail_alert'));
@@ -1076,7 +1115,8 @@ class ModelCheckoutOrder extends Model {
 				$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
 				$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 				$mail->setText($message);
-				$mail->send();
+				$mail->send();							
+				
 			}
 
 			// If order status in the complete range create any vouchers that where in the order need to be made available.

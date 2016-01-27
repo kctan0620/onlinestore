@@ -39,6 +39,7 @@ class ControllerCommonMenu extends Controller {
 		$data['text_download'] = $this->language->get('text_download');
 		$data['text_error_log'] = $this->language->get('text_error_log');
 		$data['text_extension'] = $this->language->get('text_extension');
+		$data['text_event_page'] = $this->language->get('text_event_page');
 		$data['text_feed'] = $this->language->get('text_feed');
 		$data['text_fraud'] = $this->language->get('text_fraud');
 		$data['text_filter'] = $this->language->get('text_filter');
@@ -136,6 +137,7 @@ class ControllerCommonMenu extends Controller {
 		$data['custom_field'] = $this->url->link('sale/custom_field', 'token=' . $this->session->data['token'], 'SSL');
 		$data['download'] = $this->url->link('catalog/download', 'token=' . $this->session->data['token'], 'SSL');
 		$data['error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'], 'SSL');
+		$data['event_page'] = $this->url->link('event/event', 'token=' . $this->session->data['token'], 'SSL');		
 		$data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');
 		$data['filter'] = $this->url->link('catalog/filter', 'token=' . $this->session->data['token'], 'SSL');
 		$data['fraud'] = $this->url->link('extension/fraud', 'token=' . $this->session->data['token'], 'SSL');

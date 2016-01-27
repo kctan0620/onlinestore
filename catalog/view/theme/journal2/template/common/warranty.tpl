@@ -16,7 +16,7 @@
 				      <h2 class="secondary-title">Warranty Form</h2>
 				    </fieldset>
 				    
-				     <img id="banner_warranty" style="width:100%;" src="http://www.tmt.my/onlinestore/image/Banner/Banner for Warranty page.jpg">
+				     <img id="banner_warranty" style="width:100%;" src="http://www.tmt.my/onlinestore/image/Banner/Banner Waranty 2.jpg">
 				    
 				     <div class="pictureTrigger">
 				      	<a href="http://www.tmt.my/onlinestore/image/Banner/Invoice_Example.PNG" class="col-sm-2 control-label " target="_blank"><b>Example Invoice No</b></a>

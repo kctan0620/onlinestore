@@ -9,6 +9,18 @@
         exit();
     }
 ?>
+<?php 
+$info = getdate();
+$date = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+$sec = $info['seconds'];
+
+$current_date = "$date/$month/$year == $hour:$min:$sec";
+//echo 'Date: '. $current_date;
+?>
 <html dir="<?php echo $direction; ?>" lang="<?php echo $lang; ?>" class="<?php echo $this->journal2->html_classes->getAll(); ?>" data-j2v="<?php echo JOURNAL_VERSION; ?>">
 <head>
 <meta charset="UTF-8" />
@@ -130,6 +142,12 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 <?php elseif(!empty($this->request->get['path']) && $this->request->get['path'] == 179): ?>
 <body style="background-color: #000;background-image: none;">
 <!--body style="background-color: #0099CC;background-image: url('image/catalog/blue.jpg') "-->
+<?php elseif(!empty($this->request->get['path']) && $this->request->get['path'] == 333): ?>
+<body style="background-color: #084f9d;background-image: none;">
+<?php elseif(!empty($this->request->get['path']) && $this->request->get['path'] == 346): ?> <!-- Samsung Page -->
+<body style="background-color: #0088b5;background-image: none;">
+<?php elseif(!empty($this->request->get['path']) && $this->request->get['path'] == 337): ?> <!-- Razer Page -->
+<body style="background-color: #000;background-image: url('image/catalog/dark-website-backgrounds-11.jpg') ">
 <?php else:?>
 <body>
 <?php endif;?>
@@ -204,17 +222,13 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 <div class="left_adv">	
 		<?php if(!empty($this->request->get['path']) && $this->request->get['path'] == 173): ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/left_intel.jpg" id="storeHeader_SideBanners_imgLeftBannerImage" width="144px" height="450px" alt="Intel"></a>			
+			<!--a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/Banner/Intel_Christmas_Stiker.jpg" id="storeHeader_SideBanners_imgLeftBannerImage" width="144px" height="450px" alt="Intel"></a-->			
 		<?php else: ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/left_intel.jpg" id="storeHeader_SideBanners_imgLeftBannerImage" width="144px" height="450px" alt="Intel"></a>
+			<!--a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/Banner/Intel_Christmas_Stiker.jpg" id="storeHeader_SideBanners_imgLeftBannerImage" width="144px" height="450px" alt="Intel"></a-->
 		<?php endif;?>
 </div>
 
-<div class="right_adv">
-		<?php if(!empty($this->request->get['path']) && $this->request->get['path'] == 173): ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/lazada_voucher.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>			
-		<?php else: ?>
-			<a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=173"><img src="http://www.tmt.my/onlinestore/image/lazada_voucher.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a>
-		<?php endif;?>			
+<div class="right_adv">				
+		<!--a href="http://www.tmt.my/onlinestore/index.php?route=product/category&path=195"><img src="http://www.tmt.my/onlinestore/image/Banner/like_unlock_adv.jpg" id="storeHeader_SideBanners_imgRightBannerImage" width="144px" height="450px" alt="Windows 10"></a-->		
 </div>
 <div class="extended-container">

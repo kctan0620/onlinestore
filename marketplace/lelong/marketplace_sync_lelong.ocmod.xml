@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+   	<name><![CDATA[<font color="#0000"><b>Marketplace Sync Lelong.my</font>]]></name>
+    <version><![CDATA[<b>1.0</b>]]></version>
+	<code>marketplace_sync_lelong</code>
+    <author><![CDATA[<font color="#CC0000"><b>Chun Kiat</font>]]></author>
+    <link><![CDATA[www.chunkiat.com.my]]></link>
+<file path="admin/view/template/catalog/category_form.tpl">
+		<operation>
+			<search><![CDATA[<li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>]]></search>
+			<add position="before"><![CDATA[<li><a href="#tab-lelong" data-toggle="tab"><?php echo $tab_lelong; ?></a></li>]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[<div class="tab-pane" id="tab-design">]]></search>
+			<add position="before"><![CDATA[<div class="tab-pane" id="tab-lelong">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_lelong_category; ?></label>
+                <div class="col-sm-10">
+                  <select name="lelong_category" id="lelong-category" class="form-control">
+                    <option value=""></option>
+                          <?php foreach ($lelong_categories as $lelong_category) { ?>
+                          <?php if (isset($default_lelong_category_id) && $default_lelong_category_id == $lelong_category['category_id']) { ?>
+                          <option value="<?php echo $lelong_category['category_id']; ?>" selected="selected"><?php echo $lelong_category['name']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $lelong_category['category_id']; ?>"><?php echo $lelong_category['name']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                  </select>
+                </div>
+              </div>
+			  <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_lelong_store_category; ?></label>
+                <div class="col-sm-10">
+                  <select name="lelong_store_category" id="lelong-store-category" class="form-control">
+                    <option value=""></option>
+                          <?php foreach ($lelong_store_categories as $lelong_store_category) { ?>
+                          <?php if (isset($default_lelong_store_category_id) && $default_lelong_store_category_id == $lelong_store_category['category_id']) { ?>
+                          <option value="<?php echo $lelong_store_category['category_id']; ?>" selected="selected"><?php echo $lelong_store_category['name']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $lelong_store_category['category_id']; ?>"><?php echo $lelong_store_category['name']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                  </select>
+                </div>
+              </div>
+			  <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_lelong_shipping_fee; ?></label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<div class="input-group-addon"><?php echo $entry_west_malaysia." (RM)"; ?></div>
+						<input type="text" class="form-control" name="lelong_shipping_fee_west" id="lelong-shipping-fee-west" value="<?php echo $lelong_shipping_fee_west; ?>" placeholder="0.00" />
+					</div>
+					<div class="input-group">
+						<div class="input-group-addon"><?php echo $entry_sabah." (RM)"; ?></div>
+						<input type="text" class="form-control" name="lelong_shipping_fee_sabah" id="lelong-shipping-fee-sabah" value="<?php echo $lelong_shipping_fee_sabah; ?>" placeholder="0.00" />
+					</div>
+					<div class="input-group">
+						<div class="input-group-addon"><?php echo $entry_sarawak." (RM)"; ?></div>
+						<input type="text" class="form-control" name="lelong_shipping_fee_sarawak" id="lelong-shipping-fee-sarawak" value="<?php echo $lelong_shipping_fee_sarawak; ?>" placeholder="0.00" />
+					</div>
+					<div class="input-group">
+						<div class="input-group-addon"><?php echo $entry_international." (RM)"; ?></div>
+						<input type="text" class="form-control" name="lelong_shipping_fee_intl" id="lelong-shipping-fee-intl" value="<?php echo $lelong_shipping_fee_intl; ?>" placeholder="0.00" />
+					</div>
+				</div>
+              </div>
+            </div>]]></add>
+		</operation>
+		
+</file>
+<file path="admin/controller/catalog/category.php">
+		<operation>
+			<search><![CDATA[$this->model_catalog_category->addCategory($this->request->post);]]></search>
+			<add position="replace"><![CDATA[$category_id = $this->model_catalog_category->addCategory($this->request->post);]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->model_catalog_category->addCategory($this->request->post);]]></search>
+			<add position="replace"><![CDATA[$category_id = $this->model_catalog_category->addCategory($this->request->post);]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->model_catalog_category->addCategory($this->request->post);]]></search>
+			<add position="after"><![CDATA[$this->load->model('setting/setting');
+			$lelong_category_key = 'lelong_category_'.$category_id;
+			$lelong_store_category_key = $lelong_category_key.'_store';
+			$lelong_shipfee_west_key = $lelong_category_key.'_shipfee_west';
+			$lelong_shipfee_sabah_key = $lelong_category_key.'_shipfee_sabah';
+			$lelong_shipfee_sarawak_key = $lelong_category_key.'_shipfee_sarawak';
+			$lelong_shipfee_intl_key = $lelong_category_key.'_shipfee_intl';
+		
+			$this->model_setting_setting->editSetting($lelong_category_key, 
+				array(
+					$lelong_category_key =>$this->request->post['lelong_category'],
+					$lelong_store_category_key =>$this->request->post['lelong_store_category'],
+					$lelong_shipfee_west_key => $this->request->post['lelong_shipping_fee_west'],
+					$lelong_shipfee_sabah_key => $this->request->post['lelong_shipping_fee_sabah'],
+					$lelong_shipfee_sarawak_key => $this->request->post['lelong_shipping_fee_sarawak'],
+					$lelong_shipfee_intl_key => $this->request->post['lelong_shipping_fee_intl']
+				)
+			);]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->model_catalog_category->editCategory($this->request->get['category_id'], $this->request->post);]]></search>
+			<add position="after"><![CDATA[$this->load->model('setting/setting');
+			$lelong_category_key = 'lelong_category_'.$this->request->get['category_id'];
+			$lelong_store_category_key = $lelong_category_key.'_store';
+			$lelong_shipfee_west_key = $lelong_category_key.'_shipfee_west';
+			$lelong_shipfee_sabah_key = $lelong_category_key.'_shipfee_sabah';
+			$lelong_shipfee_sarawak_key = $lelong_category_key.'_shipfee_sarawak';
+			$lelong_shipfee_intl_key = $lelong_category_key.'_shipfee_intl';
+		
+			$this->model_setting_setting->editSetting($lelong_category_key, 
+				array(
+					$lelong_category_key =>$this->request->post['lelong_category'],
+					$lelong_store_category_key =>$this->request->post['lelong_store_category'],
+					$lelong_shipfee_west_key => $this->request->post['lelong_shipping_fee_west'],
+					$lelong_shipfee_sabah_key => $this->request->post['lelong_shipping_fee_sabah'],
+					$lelong_shipfee_sarawak_key => $this->request->post['lelong_shipping_fee_sarawak'],
+					$lelong_shipfee_intl_key => $this->request->post['lelong_shipping_fee_intl']
+				)
+			);]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[$this->response->setOutput($this->load->view('catalog/category_form.tpl', $data));]]></search>
+			<add position="before"><![CDATA[$this->load->model('marketplace/sync_product_lelong');
+		$data['lelong_categories'] = $this->model_marketplace_sync_product_lelong->getLelongCategories();
+		
+		$category_id = isset($this->request->get['category_id'])?$this->request->get['category_id']:"";
+		$data['default_lelong_category_id'] = $this->config->get('lelong_category_'.$category_id);
+		
+		$data['lelong_store_categories'] = $this->model_marketplace_sync_product_lelong->getLelongStoreCategories();
+		$data['default_lelong_store_category_id'] = $this->config->get('lelong_category_'.$category_id."_store");
+		
+		$data['lelong_shipping_fee_west'] = $this->config->get('lelong_category_'.$category_id."_shipfee_west");
+		$data['lelong_shipping_fee_sabah'] = $this->config->get('lelong_category_'.$category_id."_shipfee_sabah");
+		$data['lelong_shipping_fee_sarawak'] = $this->config->get('lelong_category_'.$category_id."_shipfee_sarawak");
+		$data['lelong_shipping_fee_intl'] = $this->config->get('lelong_category_'.$category_id."_shipfee_intl");
+		
+		
+		$data['tab_lelong'] = $this->language->get('tab_lelong');
+		$data['entry_lelong_category'] = $this->language->get('entry_lelong_category');
+		$data['entry_lelong_store_category'] = $this->language->get('entry_lelong_store_category');
+		$data['entry_lelong_shipping_fee'] = $this->language->get('entry_lelong_shipping_fee');
+		$data['entry_west_malaysia'] = $this->language->get('entry_west_malaysia');
+		$data['entry_sabah'] = $this->language->get('entry_sabah');
+		$data['entry_sarawak'] = $this->language->get('entry_sarawak');
+		$data['entry_international'] = $this->language->get('entry_international');]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[if (utf8_strlen($this->request->post['keyword']) > 0) {
+			$this->load->model('catalog/url_alias');
+
+			$url_alias_info = $this->model_catalog_url_alias->getUrlAlias($this->request->post['keyword']);
+
+			if ($url_alias_info && isset($this->request->get['category_id']) && $url_alias_info['query'] != 'category_id=' . $this->request->get['category_id']) {
+				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+			}
+
+			if ($url_alias_info && !isset($this->request->get['category_id'])) {
+				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+			}
+
+			if ($this->error && !isset($this->error['warning'])) {
+				$this->error['warning'] = $this->language->get('error_warning');
+			}
+		}]]></search>
+			<add position="after"><![CDATA[if(strlen($this->request->post['lelong_category']) < 1){
+			$this->error['warning'] = $this->language->get('error_warning');
+		}
+
+		if(strlen($this->request->post['lelong_store_category']) < 1){
+			$this->error['warning'] = $this->language->get('error_warning');
+		}
+
+		if(!is_numeric($this->request->post['lelong_shipping_fee_west'])){
+			$this->error['warning'] = $this->language->get('warning_force_digits');
+		}
+		
+		if(!is_numeric($this->request->post['lelong_shipping_fee_sabah'])){
+			$this->error['warning'] = $this->language->get('warning_force_digits');
+		}
+		
+		if(!is_numeric($this->request->post['lelong_shipping_fee_sarawak'])){
+			$this->error['warning'] = $this->language->get('warning_force_digits');
+		}
+		
+		if(!is_numeric($this->request->post['lelong_shipping_fee_intl'])){
+			$this->error['warning'] = $this->language->get('warning_force_digits');
+		}]]></add>
+		</operation>
+</file>
+<file path="admin/language/english/catalog/category.php">
+		<operation>
+			<search><![CDATA[$_['error_keyword']          = 'SEO keyword already in use!';]]></search>
+			<add position="replace"><![CDATA[// Lelong
+$_['tab_lelong']           = 'Lelong';
+$_['entry_lelong_category']           = 'Marketplace Category';
+$_['entry_lelong_store_category']           = 'Store Category';
+$_['entry_lelong_shipping_fee']           = 'Shipping Fee';
+$_['entry_west_malaysia']           = 'West Malaysia';
+$_['entry_sabah']           = 'Sabah';
+$_['entry_sarawak']           = 'Sarawak';
+$_['entry_international']           = 'International';
+$_['warning_force_digits'] = 'Warning : Shipping Fees must be digits, eg : 0.00, 4.50';]]></add>
+		</operation>
+</file>
+</modification>

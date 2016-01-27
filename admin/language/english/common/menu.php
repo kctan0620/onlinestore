@@ -20,6 +20,7 @@ $_['text_design']                      = 'Design';
 $_['text_download']                    = 'Downloads';
 $_['text_error_log']                   = 'Error Logs';
 $_['text_extension']                   = 'Extensions';
+$_['text_event_page']                  = 'Event Page';
 $_['text_feed']                        = 'Feeds';
 $_['text_filter']                      = 'Filters';
 $_['text_fraud']                       = 'Anti-Fraud';

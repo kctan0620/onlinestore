@@ -1,4 +1,16 @@
 <?php echo $header; ?><?php echo $column_left; ?>
+<?php 
+$info = getdate();
+$date = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+$sec = $info['seconds'];
+
+$current_date = "$date/$month/$year == $hour:$min:$sec";
+
+?>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -11,6 +23,7 @@
         <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
         <?php } ?>
       </ul>
+      <?php echo  $current_date;?>
     </div>
   </div>
   <div class="container-fluid">
@@ -57,6 +70,7 @@
                       <?php } ?>
                     </div>
                   </div>
+                
                   <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
                     <div class="col-sm-10">
@@ -932,12 +946,12 @@
                       <td class="text-right"><input type="text" name="product_special[<?php echo $special_row; ?>][priority]" value="<?php echo $product_special['priority']; ?>" placeholder="<?php echo $entry_quantity; ?>" class="form-control" /></td>
                       <td class="text-right"><input type="text" name="product_special[<?php echo $special_row; ?>][price]" value="<?php echo $product_special['price']; ?>" placeholder="<?php echo $entry_price; ?>" class="form-control" /></td>
                       <td class="text-left" style="width: 20%;"><div class="input-group date">
-                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_start]" value="<?php echo $product_special['date_start']; ?>" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_start[<?php echo $special_row; ?>]" class="form-control" />
+                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_start]" value="<?php echo $product_special['date_start']; ?>" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:mm" id="datetimepicker_start[<?php echo $special_row; ?>]" class="form-control" />
                           <span class="input-group-btn">
                           <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                           </span></div></td>
                       <td class="text-left" style="width: 20%;"><div class="input-group date">
-                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_end]" value="<?php echo $product_special['date_end']; ?>" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_end[<?php echo $special_row; ?>]" class="form-control" />
+                          <input type="text" name="product_special[<?php echo $special_row; ?>][date_end]" value="<?php echo $product_special['date_end']; ?>" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:mm" id="datetimepicker_end[<?php echo $special_row; ?>]" class="form-control" />
                           <span class="input-group-btn">
                           <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
                           </span></div></td>
@@ -1060,7 +1074,24 @@
   </div>
   <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
-$('#input-description<?php echo $language['language_id']; ?>').summernote({height: 300});
+$('#input-description<?php echo $language['language_id']; ?>').summernote({
+	height: 300,	
+    tabsize: 2,    
+    toolbar: [		   
+		    ['style', ['style']],
+	        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+	        ['fontsize', ['fontsize']],
+	        ['fontname', ['fontname']],
+	        ['color', ['color']],
+	        ['para', ['ul', 'ol', 'paragraph']],
+	        ['height', ['height']],
+	        ['table', ['table']],
+	        ['insert', ['link', 'picture', 'hr']],
+	        ['view', ['fullscreen', 'codeview']],
+	        ['help', ['help']]		    
+		  ]	
+		  
+});
 <?php } ?>
 //--></script> 
   <script type="text/javascript"><!--
@@ -1468,8 +1499,8 @@ function addSpecial() {
     html += '  </select></td>';		
     html += '  <td class="text-right"><input type="text" name="product_special[' + special_row + '][priority]" value="" placeholder="<?php echo $entry_priority; ?>" class="form-control" /></td>';
 	html += '  <td class="text-right"><input type="text" name="product_special[' + special_row + '][price]" value="" placeholder="<?php echo $entry_price; ?>" class="form-control" /></td>';
-    html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_start[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-	html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:MM:SS" id="datetimepicker_end[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+    html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_start]" value="" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD HH:mm" id="datetimepicker_start[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+	html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_special[' + special_row + '][date_end]" value="" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD HH:mm" id="datetimepicker_end[' + special_row + ']" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#special-row' + special_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
 	
@@ -1558,4 +1589,8 @@ $('.datetime').datetimepicker({
 $('#language a:first').tab('show');
 $('#option a:first').tab('show');
 //--></script></div>
+
+
+
+  
 <?php echo $footer; ?> 

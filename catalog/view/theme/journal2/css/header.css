@@ -1086,7 +1086,7 @@ MEGA-MENU HTML
   line-height: 100% !important; }
 .mega-menu .mega-menu-column {
   float: left;
-  margin: 0 0 -10px 0; }
+  margin:10px; }
   .mega-menu .mega-menu-column:last-of-type > div {
     margin-right: -20px; }
   .mega-menu .mega-menu-column .menu-cms-block {

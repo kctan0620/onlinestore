@@ -15,58 +15,22 @@
   <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_download; ?></p>
   <p style="margin-top: 0px; margin-bottom: 20px;"><a href="<?php echo $download; ?>"><?php echo $download; ?></a></p>
   <?php } ?>
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+  
+    
+  <table style="width: 100%; border: none; margin-bottom: 20px;">
     <thead>
       <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2"><?php echo $text_order_detail; ?></td>
+        <td style="font-size: 12px; border: none; font-weight: bold; padding: 7px; color: #222222; text-align: right" colspan="2"  >Ordered at: <?php echo $date_added; ?></td>
       </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b><?php echo $text_order_id; ?></b> <?php echo $order_id; ?><br />
-          <b><?php echo $text_date_added; ?></b> <?php echo $date_added; ?><br />
-          <b><?php echo $text_payment_method; ?></b> <?php echo $payment_method; ?><br />
-          <?php if ($shipping_method) { ?>
-          <b><?php echo $text_shipping_method; ?></b> <?php echo $shipping_method; ?>
-          <?php } ?></td>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b><?php echo $text_email; ?></b> <?php echo $email; ?><br />
-          <b><?php echo $text_telephone; ?></b> <?php echo $telephone; ?><br />
-          <b><?php echo $text_ip; ?></b> <?php echo $ip; ?><br />
-          <b><?php echo $text_order_status; ?></b> <?php echo $order_status; ?><br /></td>
-      </tr>
-    </tbody>
+    </thead>    
   </table>
-  <?php if ($comment) { ?>
+  
   <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
     <thead>
       <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;"><?php echo $text_instruction; ?></td>
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; font-weight: bold; text-align: left; padding: 7px; color: #222222;" colspan="2"><?php echo $text_order_id; ?>: <?php echo $order_id; ?></td>
       </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?php echo $comment; ?></td>
-      </tr>
-    </tbody>
-  </table>
-  <?php } ?>
-  <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;"><?php echo $text_payment_address; ?></td>
-        <?php if ($shipping_address) { ?>
-        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;"><?php echo $text_shipping_address; ?></td>
-        <?php } ?>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?php echo $payment_address; ?></td>
-        <?php if ($shipping_address) { ?>
-        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?php echo $shipping_address; ?></td>
-        <?php } ?>
-      </tr>
-    </tbody>
+    </thead>    
   </table>
   <table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
     <thead>
@@ -111,6 +75,62 @@
       <?php } ?>
     </tfoot>
   </table>
+
+  
+  <table style="width: 100%; border: none;">
+  	<tr>
+  	<td width="45%" valign="top">
+	  	<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+		    <thead>
+		      <tr>
+		        <?php if ($shipping_address) { ?>
+		        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;"><?php echo $text_shipping_address; ?></td>
+		        <?php } ?>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <?php if ($shipping_address) { ?>
+		        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?php echo $shipping_address; ?></td>
+		        <?php } ?>
+		      </tr>
+		    </tbody>
+		</table>		
+  	</td>
+  	<td width="10%">
+  		&nbsp;
+  	</td>
+  	<td width="45%" valign="top">
+  	<table style="border-collapse: collapse; width: 100%; border-top: 1px solid #DDDDDD; border-left: 1px solid #DDDDDD; margin-bottom: 20px;">
+    <thead>
+      <tr>      
+        <td style="font-size: 12px; border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; background-color: #EFEFEF; font-weight: bold; text-align: left; padding: 7px; color: #222222;">Contact Information</td>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>        
+        <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">
+          <!--b><?php echo $text_email; ?></b> <?php echo $email; ?><br /-->
+          <b><?php echo $firstname.' '.$lastname?></b><br />
+          <b><?php echo $email; ?></b><br />
+          <b><?php echo $telephone; ?><br />
+          <b><?php echo $ip; ?></b><br />
+          <!--b><?php echo $text_order_status; ?></b> <?php echo $order_status; ?><br /-->
+          </td>
+        </td>
+      </tr>
+    </tbody>
+  	</table>
+  	</td> 
+  	</tr>
+  	
+  </table>
+  
+  
+  
+  
+  
+
   <p style="margin-top: 0px; margin-bottom: 20px;"><?php echo $text_footer; ?></p>
 </div>
 </body>

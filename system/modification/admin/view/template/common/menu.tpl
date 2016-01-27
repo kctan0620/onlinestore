@@ -106,6 +106,7 @@
   <li><a class="parent"><i class="fa fa-share-alt fa-fw"></i> <span><?php echo $text_marketing; ?></span></a>
     <ul>
       <li><a href="<?php echo $marketing; ?>"><?php echo $text_marketing; ?></a></li>
+      <li><a href="<?php echo $event_page; ?>"><?php echo $text_event_page; ?></a></li>
       <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
       <li><a href="<?php echo $coupon; ?>"><?php echo $text_coupon; ?></a></li>
       <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>

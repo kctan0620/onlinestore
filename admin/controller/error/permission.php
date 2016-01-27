@@ -57,7 +57,8 @@ class ControllerErrorPermission extends Controller {
 				'dashboard/map',
 				'dashboard/activity',
 				'dashboard/chart',
-				'dashboard/recent'
+				'dashboard/recent',
+				'event/event',
 			);
 
 			if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {

@@ -700,7 +700,9 @@ p img {
 .static-banner {
   position: relative;
   padding-right: 20px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px; 
+  clear: both}
+  
   .static-banner img {
     width: 100%;
     height: auto;
